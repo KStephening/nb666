@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
-import  { Configuration, OpenAIApi }  from "https://esm.sh//openai";
+import  { Configuration, OpenAIApi }  from "https://esm.sh/openai";
 const OPENAI_API_KEY = "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";
 
 async function handler(req: Request): Promise<Response> {
