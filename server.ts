@@ -3,21 +3,21 @@ async function handler(req: Request): Promise<Response> {
   switch (req.method) {
 
     case "POST": {
-      const { text } = await req.json().catch(() => null);
+      const data = await req.json().catch(() => null);
       // 请求参数
-      const data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [
-          { "role": "system", "content": "You are a helpful assistant." },
-          { "role": "user", "content": text },
-        ]
-      }
+      // const data = {
+      //   "model": "gpt-3.5-turbo",
+      //   "messages": [
+      //     { "role": "system", "content": "You are a helpful assistant." },
+      //     { "role": "user", "content": text },
+      //   ]
+      // }
       // 发送POST请求
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer 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'
         },
         body: JSON.stringify(data)
       });
@@ -25,9 +25,9 @@ async function handler(req: Request): Promise<Response> {
       // 解析返回的JSON数据
       const json = await response.json();
       console.log(json);
-      const body = json;
+      const body = JSON.stringify(json);
       return new Response(body, {
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json; charset=utf-8" },
       });
     }
 
