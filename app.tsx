@@ -1,5 +1,5 @@
 import { h, renderToString, useState } from "https://esm.sh/preact";
-import { useStatefulFetch } from "https://cdn.skypack.dev/use-stateful-fetch";
+import { fetch } from "https://deno.land/x/fetch";
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
 import { openai } from "https://deno.land/x/openai/mod.ts";
 const OPENAI_API_KEY = "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";
@@ -7,7 +7,7 @@ const OPENAI_API_KEY = "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";
 const App = () => {
   const [history, setHistory] = useState([]);
   const [input, setInput] = useState("");
-  const [sendRequest, { loading, data }] = useStatefulFetch("/api/chat", {
+  const [sendRequest, { loading, data }] = fetch("/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const App = () => {
     setHistory([...history, { user: input, bot: "" }]);
     setInput("");
 
-    const response = await sendRequest({ text: input });
+    const response = await fetch({ text: input });
 
     setHistory((prev) => {
       const lastIndex = prev.length - 1;
