@@ -1,40 +1,31 @@
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
-import  { Configuration, OpenAIApi }  from "https://esm.sh/openai";
-const OPENAI_API_KEY = "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";
-
 async function handler(req: Request): Promise<Response> {
   switch (req.method) {
 
     case "POST": {
       const { text } = await req.json().catch(() => null);
-
-      // const model = "davinci";
-      // const prompt = `The following is a conversation with an AI assistant. The assistant helps with various tasks.\n\nUser: ${text}\nAI:`;
-
-      const configuration = new Configuration({
-        apiKey: OPENAI_API_KEY,
+      // 请求参数
+      const data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+          { "role": "system", "content": "You are a helpful assistant." },
+          { "role": "user", "content": text },
+        ]
+      }
+      // 发送POST请求
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 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'
+        },
+        body: JSON.stringify(data)
       });
-      const openai = new OpenAIApi(configuration);
-      const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: "Say this is a test",
-        temperature: 0,
-        max_tokens: 7,
-      });
-      // const result = await openai.createCompletion(
-      //   {
-      //     engine: model,
-      //     prompt,
-      //     maxTokens: 1024,
-      //     n: 1,
-      //     stop: "\n",
-      //     temperature: 0.5,
-      //   },
-      //   OPENAI_API_KEY
-      // );
 
-      // const response = result.choices[0].text.trim();
-      const body = { response };
+      // 解析返回的JSON数据
+      const json = await response.json();
+      console.log(json);
+      const body = json;
       return new Response(body, {
         headers: { "content-type": "application/json" },
       });
