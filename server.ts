@@ -17,7 +17,7 @@ async function handler(req: Request): Promise<Response> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer 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'
         },
         body: JSON.stringify(data)
       });
