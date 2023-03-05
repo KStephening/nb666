@@ -1,4 +1,4 @@
-import { h, renderToString, useState } from "https://cdn.skypack.dev/preact";
+import { h, renderToString, useState } from "https://esm.sh/preact";
 import { useStatefulFetch } from "https://cdn.skypack.dev/use-stateful-fetch";
 import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
 import { openai } from "https://deno.land/x/openai/mod.ts";
