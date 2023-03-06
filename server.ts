@@ -13,7 +13,7 @@ async function handler(req: Request): Promise<Response> {
       //   ]
       // }
       // 发送POST请求
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch('https://gpt-ecru.vercel.app/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
