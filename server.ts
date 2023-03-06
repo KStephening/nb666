@@ -4,6 +4,7 @@ async function handler(req: Request): Promise<Response> {
 
     case "POST": {
       const data = await req.json().catch(() => null);
+      console.log("text");
       // 请求参数
       // const data = {
       //   "model": "gpt-3.5-turbo",
@@ -22,9 +23,9 @@ async function handler(req: Request): Promise<Response> {
       });
 
       // 解析返回的JSON数据
-      const text = await response.text()
-      console.log(text);
-      return new Response(text, {
+      const body = response.body
+      console.log(body);
+      return new Response(body, {
         headers: { "content-type": "text/plain;charset=UTF-8" },
       });
     }
