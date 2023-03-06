@@ -17,17 +17,15 @@ async function handler(req: Request): Promise<Response> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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'
         },
         body: JSON.stringify(data)
       });
 
       // 解析返回的JSON数据
-      const json = await response.json();
-      console.log(json);
-      const body = JSON.stringify(json);
-      return new Response(body, {
-        headers: { "content-type": "application/json; charset=utf-8" },
+      const text = await response.text()
+      console.log(text);
+      return new Response(text, {
+        headers: { "content-type": "text/plain;charset=UTF-8" },
       });
     }
 
