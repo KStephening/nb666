@@ -26,7 +26,7 @@ async function handler(req: Request): Promise<Response> {
       const body = response.body
       console.log(body);
       return new Response(body, {
-        headers: { "content-type": "text/plain;charset=UTF-8" },
+        headers: {'content-type': 'application/octet-stream', },
       });
     }
 
